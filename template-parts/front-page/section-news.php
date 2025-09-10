@@ -53,6 +53,59 @@ $regular_news = get_posts(array(
 $all_news = array_merge($important_news, $regular_news);
 ?>
 
+<style>
+/* コンテナ構造をsection-search.phpに合わせる */
+.container {
+    max-width: 1200px;
+    padding: 0 2rem;
+}
+
+/* フォントサイズをsection-search.phpに合わせる */
+.hero-title {
+    font-size: 2rem;
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1.5rem;
+    }
+    .hero-title {
+        font-size: 1.5rem;
+    }
+    .hero-subtitle {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 1rem;
+    }
+    .hero-title {
+        font-size: 1.25rem;
+    }
+    .hero-subtitle {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .hero-title {
+        font-size: 1.1rem;
+    }
+    .hero-subtitle {
+        font-size: 0.8rem;
+    }
+}
+</style>
+
 <!-- News Section -->
 <section id="news-section" class="news-section py-20 bg-gradient-to-br from-white via-gray-50 to-indigo-50 relative overflow-hidden">
     <!-- 背景装飾 -->
@@ -61,16 +114,20 @@ $all_news = array_merge($important_news, $regular_news);
         <div class="absolute bottom-0 left-0 w-96 h-96 bg-emerald-400 rounded-full filter blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
     </div>
 
-    <div class="container mx-auto px-4 relative z-10">
+    <div class="container mx-auto relative z-10">
         <!-- Section Header -->
         <div class="text-center mb-12 animate-fade-in-up">
-            <span class="inline-block px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-sm font-semibold rounded-full mb-4">
-                <i class="fas fa-newspaper mr-2"></i>最新情報
-            </span>
-            <h2 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-800 via-blue-700 to-indigo-700 bg-clip-text text-transparent mb-4">
-                最新ニュース・お知らせ
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 
+                      rounded-2xl text-white text-2xl mb-6 shadow-lg animate-bounce-gentle">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clip-rule="evenodd"/>
+                    <path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V9a1 1 0 00-1-1h-1v3a2 2 0 01-2 2H9.5a1.5 1.5 0 010-3H11V7a2 2 0 012-2h2z"/>
+                </svg>
+            </div>
+            <h2 class="hero-title font-black text-slate-800 mb-4 animate-slide-up" style="animation-delay: 0.2s;">
+                📰 最新ニュース・お知らせ
             </h2>
-            <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+            <p class="hero-subtitle text-slate-600 max-w-2xl mx-auto leading-relaxed animate-slide-up" style="animation-delay: 0.4s;">
                 助成金・補助金に関する最新情報や重要なお知らせをチェック
             </p>
         </div>

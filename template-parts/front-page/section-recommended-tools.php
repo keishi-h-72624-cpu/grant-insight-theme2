@@ -246,6 +246,59 @@ add_action('wp_footer', function() {
 });
 ?>
 
+<style>
+/* コンテナ構造をsection-search.phpに合わせる */
+.container {
+    max-width: 1200px;
+    padding: 0 2rem;
+}
+
+/* フォントサイズをsection-search.phpに合わせる */
+.hero-title {
+    font-size: 2rem;
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1.5rem;
+    }
+    .hero-title {
+        font-size: 1.5rem;
+    }
+    .hero-subtitle {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 1rem;
+    }
+    .hero-title {
+        font-size: 1.25rem;
+    }
+    .hero-subtitle {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .hero-title {
+        font-size: 1.1rem;
+    }
+    .hero-subtitle {
+        font-size: 0.8rem;
+    }
+}
+</style>
+
 <!-- Recommended Tools Section - Tailwind CSS Play CDN Version -->
 <section class="recommended-tools-section py-20 bg-gradient-to-br from-gray-50 via-blue-50/30 to-green-50/30 relative overflow-hidden">
     <!-- 背景装飾エフェクト -->
@@ -259,7 +312,7 @@ add_action('wp_footer', function() {
         <div class="floating-decoration absolute top-10 right-1/4 w-28 h-28 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full blur-2xl" style="animation-delay: 0.5s;"></div>
     </div>
 
-    <div class="container mx-auto px-6 relative z-10">
+    <div class="container mx-auto relative z-10">
         <!-- セクションヘッダー -->
         <div class="text-center mb-16 animate-on-scroll">
             <div class="inline-flex items-center gap-3 glassmorphism rounded-full px-8 py-4 shadow-lg mb-8 animate-bounce-soft">
@@ -271,10 +324,10 @@ add_action('wp_footer', function() {
                 <span class="text-sm font-semibold text-gray-700 bg-white/50 px-3 py-1 rounded-full">効率化</span>
             </div>
             
-            <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-6 leading-tight">
+            <h2 class="hero-title font-black text-gray-900 mb-6 leading-tight">
                 <span class="gradient-text"><?php echo gi_safe_escape($tools_title); ?></span>
             </h2>
-            <p class="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-medium">
+            <p class="hero-subtitle text-gray-600 max-w-2xl mx-auto leading-relaxed font-medium">
                 <?php echo gi_safe_escape($tools_subtitle); ?>
             </p>
             

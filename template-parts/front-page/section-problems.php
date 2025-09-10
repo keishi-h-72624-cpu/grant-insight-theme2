@@ -1,6 +1,6 @@
 <?php
 /**
- * Template part for displaying the news section on the front page
+ * Template part for displaying the problems section on the front page
  * Tailwind CSS Play CDN完全対応版
  */
 ?>
@@ -67,36 +67,88 @@
     }
 </script>
 
+<style>
+/* コンテナ構造をsection-search.phpに合わせる */
+.container {
+    max-width: 1200px;
+    padding: 0 2rem;
+}
+
+/* フォントサイズをsection-search.phpに合わせる */
+.hero-title {
+    font-size: 2rem;
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1.5rem;
+    }
+    .hero-title {
+        font-size: 1.5rem;
+    }
+    .hero-subtitle {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 1rem;
+    }
+    .hero-title {
+        font-size: 1.25rem;
+    }
+    .hero-subtitle {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .hero-title {
+        font-size: 1.1rem;
+    }
+    .hero-subtitle {
+        font-size: 0.8rem;
+    }
+}
+</style>
+
 <section class="relative py-20 bg-gradient-to-br from-gray-50 via-slate-50 to-gray-100 overflow-hidden">
     <!-- 背景装飾 -->
     <div class="absolute inset-0 opacity-5">
         <svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
             <defs>
-                <pattern id="news-pattern" width="40" height="40" patternUnits="userSpaceOnUse">
+                <pattern id="problems-pattern" width="40" height="40" patternUnits="userSpaceOnUse">
                     <circle cx="20" cy="20" r="2" fill="rgba(249, 115, 22, 0.3)"/>
                     <circle cx="10" cy="10" r="1" fill="rgba(249, 115, 22, 0.2)"/>
                     <circle cx="30" cy="30" r="1" fill="rgba(249, 115, 22, 0.2)"/>
                 </pattern>
             </defs>
-            <rect width="100%" height="100%" fill="url(#news-pattern)"/>
+            <rect width="100%" height="100%" fill="url(#problems-pattern)"/>
         </svg>
     </div>
 
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="container mx-auto relative z-10">
         <!-- セクションヘッダー -->
         <div class="text-center mb-16 animate-fade-in">
-            <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-red-500 to-orange-600 
                       rounded-2xl text-white text-2xl mb-6 shadow-lg animate-bounce-gentle">
                 <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clip-rule="evenodd"/>
-                    <path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V9a1 1 0 00-1-1h-1v3a2 2 0 01-2 2H9.5a1.5 1.5 0 010-3H11V7a2 2 0 012-2h2z"/>
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
                 </svg>
             </div>
-            <h2 class="text-4xl font-black text-slate-800 mb-4 animate-slide-up" style="animation-delay: 0.2s;">
-                📰 最新ニュース・お知らせ
+            <h2 class="hero-title font-black text-slate-800 mb-4 animate-slide-up" style="animation-delay: 0.2s;">
+                よくあるお悩み・解決策
             </h2>
-            <p class="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed animate-slide-up" style="animation-delay: 0.4s;">
-                助成金・補助金に関する最新情報、制度変更、申請期限などの重要なお知らせをお届けします。
+            <p class="hero-subtitle text-slate-600 max-w-2xl mx-auto leading-relaxed animate-slide-up" style="animation-delay: 0.4s;">
+                助成金・補助金申請でよくある課題と、その解決方法をご紹介します。
             </p>
         </div>
 
@@ -385,46 +437,29 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // ニュースレター登録フォーム
-    const newsletterForm = document.querySelector('form[onsubmit="return false;"]');
-    if (newsletterForm) {
-        newsletterForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = this.querySelector('input[type="email"]').value;
-            
-            if (email) {
-                // 成功メッセージ表示
-                const button = this.querySelector('button');
-                const originalText = button.textContent;
-                button.textContent = '登録完了！';
-                button.classList.add('bg-green-500', 'text-white');
-                
-                setTimeout(() => {
-                    button.textContent = originalText;
-                    button.classList.remove('bg-green-500', 'text-white');
-                    this.reset();
-                }, 2000);
-            }
+    // カードのホバーエフェクト
+    const problemCards = document.querySelectorAll('.bg-white.rounded-2xl.shadow-xl');
+    problemCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-8px) scale(1.02)';
+            this.style.transition = 'all 0.3s ease';
         });
-    }
-
-    // ニュース項目のホバーエフェクト
-    const newsItems = document.querySelectorAll('article.group');
-    newsItems.forEach(item => {
-        item.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-2px)';
-        });
-        item.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
         });
     });
 
-    // 期限切れ警告のカウントダウン
-    const deadlineItems = document.querySelectorAll('[class*="text-red-600"]');
-    deadlineItems.forEach(item => {
-        if (item.textContent.includes('残り')) {
-            item.classList.add('animate-pulse-gentle');
-        }
+    // 解決策ボタンのクリック効果
+    const solutionLinks = document.querySelectorAll('a[href="#"]');
+    solutionLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const card = this.closest('.bg-white.rounded-2xl.shadow-xl');
+            card.style.animation = 'bounceGentle 0.6s ease-out';
+            setTimeout(() => {
+                card.style.animation = '';
+            }, 600);
+        });
     });
 });
 </script>
