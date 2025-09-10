@@ -25,6 +25,7 @@ require_once $inc_dir . '6-admin-functions.php'; // 管理画面関連
 require_once $inc_dir . '7-acf-setup.php';       // ACF関連
 require_once $inc_dir . '8-initial-setup.php';   // 初期データ投入
 require_once $inc_dir . 'performance-helpers.php'; // パフォーマンス最適化ヘルパー
+require_once $inc_dir . 'critical-css.php';    // Critical CSS（FOUC対策）
 
 /**
  * テーマの最終初期化

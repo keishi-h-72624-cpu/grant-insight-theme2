@@ -4,6 +4,8 @@
  * 外部CDNに依存せず、必要なスタイルのみを含む
  */
 
+/* Critical CSS - ヘッダーと基本レイアウト用 */
+
 /* リセットCSS（必要最小限） */
 * {
     box-sizing: border-box;
@@ -13,7 +15,8 @@ body {
     margin: 0;
     font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.6;
-    color: #333;
+    color: #1f2937;
+    background-color: #ffffff;
 }
 
 /* レスポンシブ画像 */
@@ -22,14 +25,125 @@ img {
     height: auto;
 }
 
-/* コンテナ */
+/* ヘッダー用Criticalスタイル */
+.header-main {
+    position: sticky;
+    top: 0;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    z-index: 1000;
+    transition: box-shadow 0.2s ease;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 4rem;
+}
+
+.site-logo {
+    flex-shrink: 1;
+    min-width: 0;
+    max-width: 75%;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    gap: 0.75rem;
+}
+
+.logo-main img {
+    height: 3rem;
+    width: auto;
+    max-width: 100%;
+}
+
+.site-title-simple h1 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0;
+    line-height: 1.2;
+    word-break: break-word;
+}
+
+.subtitle-simple p {
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin: 0.25rem 0 0 0;
+    font-weight: 500;
+}
+
+.mobile-menu-toggle {
+    flex: 0 0 auto;
+}
+
+.menu-button {
+    padding: 0.75rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.25rem;
+    color: #374151;
+}
+
+.desktop-nav {
+    display: none;
+}
+
+/* モバイルメニュー */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 20rem;
+    height: 100%;
+    background-color: #ffffff;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1050;
+    overflow-y: auto;
+}
+
+.mobile-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1040;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* ユーティリティクラス */
+.hidden { display: none !important; }
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* コンテナとグリッド */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1rem;
 }
 
-/* グリッドシステム */
 .grid {
     display: grid;
     gap: 1rem;
@@ -40,12 +154,115 @@ img {
 .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
 .grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
 
+/* フレックスボックス */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+
+/* スペーシング */
+.p-4 { padding: 1rem; }
+.p-6 { padding: 1.5rem; }
+.m-4 { margin: 1rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+
+/* テキスト */
+.text-center { text-align: center; }
+.text-lg { font-size: 1.125rem; }
+.text-xl { font-size: 1.25rem; }
+.text-2xl { font-size: 1.5rem; }
+.text-3xl { font-size: 1.875rem; }
+.font-bold { font-weight: 700; }
+.font-semibold { font-weight: 600; }
+
+/* カラー */
+.text-white { color: #fff; }
+.text-gray-600 { color: #6b7280; }
+.text-gray-800 { color: #1f2937; }
+.text-emerald-600 { color: #059669; }
+.text-blue-600 { color: #2563eb; }
+
+.bg-white { background-color: #fff; }
+.bg-gray-50 { background-color: #f9fafb; }
+.bg-emerald-600 { background-color: #059669; }
+.bg-blue-600 { background-color: #2563eb; }
+
+/* レスポンシブ対応 */
 @media (max-width: 768px) {
     .grid-cols-2,
     .grid-cols-3,
     .grid-cols-4 {
         grid-template-columns: 1fr;
     }
+    
+    .header-container {
+        padding: 0.5rem 0.75rem;
+    }
+    
+    .site-logo {
+        max-width: 70%;
+    }
+    
+    .logo-link {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+    
+    .site-title-simple h1 {
+        font-size: 0.875rem;
+    }
+    
+    .subtitle-simple {
+        display: none;
+    }
+    
+    .logo-main img {
+        height: 2.5rem;
+    }
+    
+    .mobile-menu {
+        width: 100vw;
+    }
+}
+
+@media (min-width: 1024px) {
+    .desktop-nav {
+        display: flex;
+        align-items: center;
+    }
+    
+    .mobile-menu-toggle {
+        display: none;
+    }
+    
+    .site-title-simple h1 {
+        font-size: 1.5rem;
+    }
+    
+    .logo-main img {
+        height: 4rem;
+    }
+}
+
+/* アクセシビリティ */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* フォーカス状態 */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+    outline: 2px solid #3B82F6;
+    outline-offset: 2px;
+    border-radius: 4px;
 }
 
 /* フレックスボックス */

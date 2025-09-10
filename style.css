@@ -25,10 +25,11 @@ body {
    Grant Insight Perfect Theme - Core Styles
    ========================================================================== */
 
-/* メインヘッダー */
+/* メインヘッダー - Critical CSSに移動
 .site-header {
     @apply bg-white shadow-lg border-b-2 border-emerald-500 sticky top-0 z-50;
 }
+*/
 
 .site-navigation {
     @apply bg-emerald-600 text-white;

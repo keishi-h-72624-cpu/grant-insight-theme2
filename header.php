@@ -71,30 +71,44 @@ if (!function_exists('gi_safe_excerpt')) {
     
     <?php wp_head(); ?>
     
+    <!-- Tailwind CSS Play CDN - 非同期読み込み -->
+    <script src="https://cdn.tailwindcss.com" async></script>
+    
     <!-- 追加のTailwind設定 -->
     <script>
-        if (typeof tailwind !== 'undefined' && tailwind.config) {
-            const headerConfig = {
-                theme: {
-                    extend: {
-                        ...tailwind.config.theme.extend,
-                        zIndex: {
-                            'header': '1000',
-                            'mobile-menu': '1050',
-                            'overlay': '1040'
-                        },
-                        fontFamily: {
-                            'japanese': ['Noto Sans JP', 'sans-serif']
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tailwindが読み込まれるまで待機
+            const checkTailwind = setInterval(function() {
+                if (typeof tailwind !== 'undefined' && tailwind.config) {
+                    clearInterval(checkTailwind);
+                    
+                    const headerConfig = {
+                        theme: {
+                            extend: {
+                                zIndex: {
+                                    'header': '1000',
+                                    'mobile-menu': '1050',
+                                    'overlay': '1040'
+                                },
+                                fontFamily: {
+                                    'japanese': ['Noto Sans JP', 'sans-serif']
+                                }
+                            }
                         }
-                    }
+                    };
+                    
+                    Object.assign(tailwind.config.theme.extend, headerConfig.theme.extend);
                 }
-            };
+            }, 50);
             
-            Object.assign(tailwind.config.theme.extend, headerConfig.theme.extend);
-        }
+            // 最大5秒待つ
+            setTimeout(function() {
+                clearInterval(checkTailwind);
+            }, 5000);
+        });
     </script>
 </head>
-<body <?php body_class('bg-white text-gray-900 antialiased font-japanese'); ?>>
+<body <?php body_class('font-japanese'); ?> style="background-color: #ffffff; color: #1f2937; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">>
     
     <!-- WordPressフック -->
     <?php wp_body_open(); ?>
@@ -111,7 +125,7 @@ if (!function_exists('gi_safe_excerpt')) {
     ?>
 
     <!-- メインヘッダー（レスポンシブ完全対応版） -->
-    <header class="header-main sticky top-0 bg-white shadow-md border-b border-gray-200 z-header" role="banner">
+    <header class="header-main" role="banner" style="position: sticky; top: 0; background-color: #ffffff; border-bottom: 1px solid #e5e7eb; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); z-index: 1000; transition: box-shadow 0.2s ease;">
         
         <div class="header-container">
             

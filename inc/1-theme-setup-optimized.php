@@ -76,17 +76,52 @@ add_action('after_setup_theme', 'gi_content_width', 0);
  * スクリプト・スタイルの読み込み（最適化版）
  */
 function gi_enqueue_scripts() {
-    // 最適化されたCSSファイル（外部CDN依存を削除）
-    wp_enqueue_style('gi-optimized-css', get_template_directory_uri() . '/assets/css/optimized.css', array(), GI_THEME_VERSION);
-    
-    // Google Fonts（display=swapでパフォーマンス最適化）
+    // Google Fonts（display=swapでパフォーマンス最適化）- 最初に読み込む
     wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap', array(), null);
     
-    // テーマスタイル
+    // 最適化されたCSSファイル（外部CDN依存を削除）
+    wp_enqueue_style('gi-optimized-css', get_template_directory_uri() . '/assets/css/optimized.css', array('google-fonts'), GI_THEME_VERSION);
+    
+    // テーマスタイル - optimized-cssの後に読み込む
     wp_enqueue_style('gi-style', get_stylesheet_uri(), array('gi-optimized-css'), GI_THEME_VERSION);
     
-    // メインJavaScript（最適化版）
+    // メインJavaScript（最適化版）- フッターで読み込む
     wp_enqueue_script('gi-main-js', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), GI_THEME_VERSION, true);
+    
+    // Tailwind CSSの非同期読み込みを追加
+    wp_add_inline_script('gi-main-js', '
+        // Tailwind CSSの非同期読み込み
+        (function() {
+            if (window.tailwind) return;
+            
+            var script = document.createElement("script");
+            script.src = "https://cdn.tailwindcss.com";
+            script.async = true;
+            
+            script.onload = function() {
+                if (window.tailwind && window.tailwind.config) {
+                    const customConfig = {
+                        theme: {
+                            extend: {
+                                zIndex: {
+                                    "header": "1000",
+                                    "mobile-menu": "1050",
+                                    "overlay": "1040"
+                                },
+                                fontFamily: {
+                                    "japanese": ["Noto Sans JP", "sans-serif"]
+                                }
+                            }
+                        }
+                    };
+                    
+                    Object.assign(window.tailwind.config.theme.extend, customConfig.theme.extend);
+                }
+            };
+            
+            document.head.appendChild(script);
+        })();
+    ');
     
     // AJAX設定（最適化版）
     wp_localize_script('gi-main-js', 'gi_ajax', array(
